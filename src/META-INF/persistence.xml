@@ -6,7 +6,10 @@
              
 	<persistence-unit name="brukernavnPersistenceUnit" transaction-type="RESOURCE_LOCAL">
 
-		<class>no.hvl.dat107.Ansatt</class>
+		<class>no.hvl.dat107.entity.Ansatt</class>
+        <class>no.hvl.dat107.entity.Avdeling</class>
+        <class>no.hvl.dat107.entity.Prosjekt</class>
+        <class>no.hvl.dat107.entity.Prosjektdeltagelse</class>
 		
 		<properties>
 		    <!--  Generelle JPA properties -->
