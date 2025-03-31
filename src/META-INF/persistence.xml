@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd" 
+		version="3.0">		
+             
+	<persistence-unit name="brukernavnPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+
+		<class>no.hvl.dat107.Ansatt</class>
+		
+		<properties>
+		    <!--  Generelle JPA properties -->
+			<property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+			
+			<!--  Erstatt verdiene her med egen database (xxxx), bruker (xxxx) og passord (yyyy) -->
+			<property name="jakarta.persistence.jdbc.url" 
+					value="jdbc:postgresql://ider-database.westeurope.cloudapp.azure.com:5433/h186502"/>
+			<property name="jakarta.persistence.jdbc.user" value="h186502"/>
+		    <property name="jakarta.persistence.jdbc.password" value="&amp;dpJlKhp&amp;2Tdyd&amp;lm1aO"/>
+			
+			<!--  EclipseLink properties -->
+            <!--  Se https://wiki.eclipse.org/EclipseLink/Examples/JPA/Logging -->
+            <property name="eclipselink.logging.level" value="WARNING"/>
+		</properties>
+		
+	</persistence-unit>
+</persistence> 
