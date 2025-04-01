@@ -22,11 +22,32 @@ public class Main {
     private static AnsattDAO ansattDAO = new AnsattDAO();
     private static AvdelingDAO avdelingDAO = new AvdelingDAO();
     private static ProsjektDAO prosjektDAO = new ProsjektDAO();
+    private static Integer max_ansatt_nr;
+    private static Integer max_avdeling_nr;
+    private static Integer max_prosjekt_nr;
     
     public static void main(String[] args) {
         boolean fortsett = true;
         
         while (fortsett) {
+        	//Finner max nummeret til ansatt for å gjøre valg lettere i menyen
+        	List<Ansatt> ansatte = ansattDAO.finnAlleAnsatte();
+            for (Ansatt a : ansatte) {
+                max_ansatt_nr = a.getAnsattId();
+            }
+            
+            //Finner max avdelingsnummer for å gjøre det lettere å velge i menyen
+            List<Avdeling> avdelinger = avdelingDAO.finnAlleAvdelinger();
+            for (Avdeling a : avdelinger) {
+                max_avdeling_nr = a.getAvdelingId();
+            }
+            
+            //Finner max prosjektnummer for å gjøre det lettere å velge i menyen
+            List<Prosjekt> prosjekter = prosjektDAO.finnAlleProsjekter();
+            for (Prosjekt p : prosjekter) {
+                max_prosjekt_nr = p.getProsjektId();
+            }
+            
             visHovedmeny();
             int valg = lesInn("Velg en handling", 0, 15);
             
@@ -81,7 +102,7 @@ public class Main {
     
     private static void sokAnsattPaId() {
         System.out.println("\n--- SØK ANSATT PÅ ID ---");
-        int id = lesInn("Ansatt-ID", 1, Integer.MAX_VALUE);
+        int id = lesInn("Ansatt-ID", 1, max_ansatt_nr);
         
         Ansatt ansatt = ansattDAO.finnAnsattMedId(id);
         if (ansatt != null) {
@@ -116,7 +137,7 @@ public class Main {
     
     private static void oppdaterStillingOgLonn() {
         System.out.println("\n--- OPPDATER STILLING OG LØNN ---");
-        int id = lesInn("Ansatt-ID", 1, Integer.MAX_VALUE);
+        int id = lesInn("Ansatt-ID", 1, max_ansatt_nr);
         
         Ansatt ansatt = ansattDAO.finnAnsattMedId(id);
         if (ansatt == null) {
@@ -190,7 +211,7 @@ public class Main {
             a.skrivUt();
         }
         
-        int avdelingId = lesInn("Velg avdelings-ID", 1, Integer.MAX_VALUE);
+        int avdelingId = lesInn("Velg avdelings-ID", 1, max_avdeling_nr);
         
         Ansatt nyAnsatt = new Ansatt(brukernavn, fornavn, etternavn, ansettelsesdato, stilling, manedslonn);
         ansattDAO.leggTilAnsatt(nyAnsatt, avdelingId);
@@ -200,7 +221,7 @@ public class Main {
     
     private static void sokAvdelingPaId() {
         System.out.println("\n--- SØK AVDELING PÅ ID ---");
-        int id = lesInn("Avdeling-ID", 1, Integer.MAX_VALUE);
+        int id = lesInn("Avdeling-ID", 1, max_avdeling_nr);
         
         Avdeling avdeling = avdelingDAO.finnAvdelingMedId(id);
         if (avdeling != null) {
@@ -212,7 +233,7 @@ public class Main {
     
     private static void visAnsattePaAvdeling() {
         System.out.println("\n--- ANSATTE PÅ AVDELING ---");
-        int id = lesInn("Avdeling-ID", 1, Integer.MAX_VALUE);
+        int id = lesInn("Avdeling-ID", 1, max_avdeling_nr);
         
         Avdeling avdeling = avdelingDAO.finnAvdelingMedId(id);
         if (avdeling != null) {
@@ -224,7 +245,7 @@ public class Main {
     
     private static void byttAvdeling() {
         System.out.println("\n--- BYTT AVDELING FOR ANSATT ---");
-        int ansattId = lesInn("Ansatt-ID", 1, Integer.MAX_VALUE);
+        int ansattId = lesInn("Ansatt-ID", 1, max_ansatt_nr);
         
         Ansatt ansatt = ansattDAO.finnAnsattMedId(ansattId);
         if (ansatt == null) {
@@ -246,7 +267,7 @@ public class Main {
             a.skrivUt();
         }
         
-        int nyAvdelingId = lesInn("Velg ny avdelings-ID", 1, Integer.MAX_VALUE);
+        int nyAvdelingId = lesInn("Velg ny avdelings-ID", 1, max_avdeling_nr);
         
         ansattDAO.byttAvdeling(ansattId, nyAvdelingId);
         System.out.println("Ansatt flyttet til ny avdeling!");
@@ -267,7 +288,7 @@ public class Main {
                     a.getAvdeling().getNavn());
         }
         
-        int sjefId = lesInn("Velg ansatt-ID for sjef", 1, Integer.MAX_VALUE);
+        int sjefId = lesInn("Velg ansatt-ID for sjef", 1, max_ansatt_nr);
         
         avdelingDAO.leggTilAvdeling(navn, sjefId);
         System.out.println("Ny avdeling opprettet!");
@@ -297,7 +318,7 @@ public class Main {
                     a.getAnsattId(), a.getFornavn(), a.getEtternavn());
         }
         
-        int ansattId = lesInn("Velg ansatt-ID", 1, Integer.MAX_VALUE);
+        int ansattId = lesInn("Velg ansatt-ID", 1, max_ansatt_nr);
         
         // Vis prosjekter
         System.out.println("\nTilgjengelige prosjekter:");
@@ -306,7 +327,7 @@ public class Main {
             p.skrivUt();
         }
         
-        int prosjektId = lesInn("Velg prosjekt-ID", 1, Integer.MAX_VALUE);
+        int prosjektId = lesInn("Velg prosjekt-ID", 1, max_prosjekt_nr);
         
         System.out.print("Rolle i prosjektet: ");
         String rolle = scanner.nextLine().trim();
@@ -326,7 +347,7 @@ public class Main {
                     a.getAnsattId(), a.getFornavn(), a.getEtternavn());
         }
         
-        int ansattId = lesInn("Velg ansatt-ID", 1, Integer.MAX_VALUE);
+        int ansattId = lesInn("Velg ansatt-ID", 1, max_ansatt_nr);
         
         // Vis prosjekter
         System.out.println("\nTilgjengelige prosjekter:");
@@ -335,7 +356,7 @@ public class Main {
             p.skrivUt();
         }
         
-        int prosjektId = lesInn("Velg prosjekt-ID", 1, Integer.MAX_VALUE);
+        int prosjektId = lesInn("Velg prosjekt-ID", 1, max_prosjekt_nr);
         
         int timer = lesInn("Antall timer", 1, 1000);
         
@@ -345,7 +366,7 @@ public class Main {
     
     private static void visProsjektInfo() {
         System.out.println("\n--- PROSJEKTINFORMASJON ---");
-        int id = lesInn("Prosjekt-ID", 1, Integer.MAX_VALUE);
+        int id = lesInn("Prosjekt-ID", 1, max_prosjekt_nr);
         
         Prosjekt prosjekt = prosjektDAO.finnProsjektMedId(id);
         if (prosjekt != null) {
@@ -365,7 +386,7 @@ public class Main {
         
         switch (valg) {
             case 1:
-                int ansattId = lesInn("Ansatt-ID", 1, Integer.MAX_VALUE);
+                int ansattId = lesInn("Ansatt-ID", 1, max_ansatt_nr);
                 try {
                     ansattDAO.slettAnsatt(ansattId);
                     System.out.println("Ansatt slettet!");
@@ -375,7 +396,7 @@ public class Main {
                 break;
                 
             case 2:
-                int avdelingId = lesInn("Avdeling-ID", 1, Integer.MAX_VALUE);
+                int avdelingId = lesInn("Avdeling-ID", 1, max_avdeling_nr);
                 try {
                     avdelingDAO.slettAvdeling(avdelingId);
                     System.out.println("Avdeling slettet!");
@@ -385,7 +406,7 @@ public class Main {
                 break;
                 
             case 3:
-                int prosjektId = lesInn("Prosjekt-ID", 1, Integer.MAX_VALUE);
+                int prosjektId = lesInn("Prosjekt-ID", 1, max_prosjekt_nr);
                 try {
                     prosjektDAO.slettProsjekt(prosjektId);
                     System.out.println("Prosjekt slettet!");
