@@ -85,7 +85,6 @@ public class AvdelingDAO {
             
             tx.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             if (tx.isActive()) {
                 tx.rollback();
             }

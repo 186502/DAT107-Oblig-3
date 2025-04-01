@@ -134,7 +134,6 @@ public class ProsjektDAO {
             
             tx.commit();
         } catch (Exception e) {
-            e.printStackTrace();
             if (tx.isActive()) {
                 tx.rollback();
             }
