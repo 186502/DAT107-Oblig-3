@@ -90,7 +90,7 @@ public class ProsjektDAO {
         try {
             tx.begin();
             
-            // Vi må finne riktig prosjektdeltagelse
+            // Finner riktig Prosjektdeltagelse
             TypedQuery<Prosjektdeltagelse> query = em.createQuery(
                     "SELECT pd FROM Prosjektdeltagelse pd " +
                     "WHERE pd.ansatt.ansatt_id = :ansattId " +
@@ -124,7 +124,7 @@ public class ProsjektDAO {
             
             Prosjekt p = em.find(Prosjekt.class, prosjektId);
             if (p != null) {
-                // Sjekk om prosjektet har deltagere
+                // Sjekker om prosjektet har deltagere
                 if (p.getDeltagelser() != null && !p.getDeltagelser().isEmpty()) {
                     throw new Exception("Kan ikke slette et prosjekt som har deltagere!");
                 }

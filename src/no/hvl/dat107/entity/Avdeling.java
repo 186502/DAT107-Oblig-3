@@ -51,7 +51,7 @@ public class Avdeling {
         }
     }
     
-    // Getters og setters
+    // Get og set metoder
     public Integer getAvdelingId() {
         return avdeling_id;
     }

@@ -50,7 +50,7 @@ public class Prosjekt {
         System.out.println("Totalt antall timer: " + totalTimer);
     }
     
-    // Getters og setters
+    // Get og set metoder
     public Integer getProsjektId() {
         return prosjekt_id;
     }

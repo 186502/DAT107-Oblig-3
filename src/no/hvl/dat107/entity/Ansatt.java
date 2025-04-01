@@ -70,7 +70,7 @@ public class Ansatt {
         }
     }
     
-    // Getters og setters
+    // Get og set metoder
     public Integer getAnsattId() {
         return ansatt_id;
     }

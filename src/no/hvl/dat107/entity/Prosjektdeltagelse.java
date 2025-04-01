@@ -42,7 +42,7 @@ public class Prosjektdeltagelse {
                 prosjekt.getNavn(), rolle, timer);
     }
     
-    // Getters og setters
+    // Get og set metoder
     public Ansatt getAnsatt() {
         return ansatt;
     }

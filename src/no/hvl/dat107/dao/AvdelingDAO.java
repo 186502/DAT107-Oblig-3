@@ -46,14 +46,14 @@ public class AvdelingDAO {
             
             Ansatt sjef = em.find(Ansatt.class, sjefId);
             if (sjef == null) {
-                throw new Exception("Finner ikke ansatt med ID: " + sjefId);
+                throw new Exception("Finner ikke sjef med ID: " + sjefId);
             }
             
             Avdeling nyAvdeling = new Avdeling(navn);
             nyAvdeling.setSjef(sjef);
             em.persist(nyAvdeling);
             
-            // Flytt sjefen til den nye avdelingen
+            // Flytter sjefen til den nye avdelingen
             sjef.setAvdeling(nyAvdeling);
             
             tx.commit();

@@ -2,7 +2,7 @@ DROP SCHEMA IF EXISTS oblig3 CASCADE;
 
 CREATE SCHEMA oblig3;
 
--- Oppretter tabeller for firmaadministrasjonssystem
+set search_path TO oblig3;
 
 -- Avdeling tabell
 CREATE TABLE Avdeling (
@@ -24,7 +24,7 @@ CREATE TABLE Ansatt (
     FOREIGN KEY (avdeling_id) REFERENCES Avdeling(avdeling_id)
 );
 
--- Legg til sjef_id i Avdeling (måtte vente med dette pga. "høna og egget"-problemet)
+-- Legger til sjef_id i Avdeling (måtte vente med dette pga. "hønen og egget")
 ALTER TABLE Avdeling ADD COLUMN sjef_id INTEGER;
 ALTER TABLE Avdeling ADD CONSTRAINT fk_sjef FOREIGN KEY (sjef_id) REFERENCES Ansatt(ansatt_id);
 
@@ -52,7 +52,7 @@ INSERT INTO Avdeling (navn) VALUES ('Markedsføring');
 INSERT INTO Avdeling (navn) VALUES ('Økonomi');
 
 -- Eksempeldata for Ansatt - legg merke til at vi ikke setter avdeling_id ennå
--- Vi må gjøre dette i to trinn på grunn av avhengigheter
+-- Vi må gjøre dette i to trinn grunnet avhengigheter
 INSERT INTO Ansatt (brukernavn, fornavn, etternavn, ansettelsesdato, stilling, manedslonn, avdeling_id) 
 VALUES ('jad', 'Jan', 'Danielsen', '2020-01-15', 'Systemutvikler', 55000, 1);
 INSERT INTO Ansatt (brukernavn, fornavn, etternavn, ansettelsesdato, stilling, manedslonn, avdeling_id) 
@@ -64,15 +64,15 @@ VALUES ('mni', 'Marit', 'Nielsen', '2022-01-05', 'Systemarkitekt', 60000, 1);
 INSERT INTO Ansatt (brukernavn, fornavn, etternavn, ansettelsesdato, stilling, manedslonn, avdeling_id) 
 VALUES ('oba', 'Olav', 'Bakken', '2020-11-20', 'Markedskonsulent', 45000, 2);
 
--- Oppdater Avdeling med sjefer
+-- Oppdaterer Avdeling med sjefer
 UPDATE Avdeling SET sjef_id = 1 WHERE avdeling_id = 1; -- Jan er sjef for IT
 UPDATE Avdeling SET sjef_id = 2 WHERE avdeling_id = 2; -- Anne er sjef for Markedsføring
 UPDATE Avdeling SET sjef_id = 3 WHERE avdeling_id = 3; -- Petter er sjef for Økonomi
 
 -- Eksempeldata for Prosjekt
 INSERT INTO Prosjekt (navn, beskrivelse) VALUES ('Nettbutikk', 'Implementering av ny nettbutikk');
-INSERT INTO Prosjekt (navn, beskrivelse) VALUES ('Markedskampanje', 'Sommerkampanje 2023');
-INSERT INTO Prosjekt (navn, beskrivelse) VALUES ('Nytt økonomisystem', 'Migrering til nytt regnskapssystem');
+INSERT INTO Prosjekt (navn, beskrivelse) VALUES ('Markedskampanje', 'Sommerkampanje 2022');
+INSERT INTO Prosjekt (navn, beskrivelse) VALUES ('Nytt regnskapssystem', 'Migrering til nytt regnskapssystem');
 
 -- Eksempeldata for Prosjektdeltagelse
 INSERT INTO Prosjektdeltagelse (ansatt_id, prosjekt_id, rolle, timer) VALUES (1, 1, 'Prosjektleder', 120);

@@ -89,9 +89,9 @@ public class AnsattDAO {
             Avdeling nyAvdeling = em.find(Avdeling.class, nyAvdelingId);
             
             if (a != null && nyAvdeling != null) {
-                // Sjekk om ansatt er sjef i sin nåværende avdeling
+                // Sjekker om ansatt er sjef i sin nåværende avdeling
                 if (a.erSjef()) {
-                    throw new Exception("Kan ikke bytte avdeling for en ansatt som er sjef!");
+                    throw new Exception("Kan ikke bytte avdeling for ansatt som er sjef!");
                 }
                 a.setAvdeling(nyAvdeling);
             }
@@ -138,12 +138,12 @@ public class AnsattDAO {
             
             Ansatt a = em.find(Ansatt.class, ansattId);
             if (a != null) {
-                // Sjekk om ansatt er sjef
+                // Sjekker om ansatt er sjef
                 if (a.erSjef()) {
                     throw new Exception("Kan ikke slette en ansatt som er sjef!");
                 }
                 
-                // Sjekk om ansatt har prosjektdeltagelser
+                // Sjekker om ansatt har prosjektdeltagelser
                 if (a.getProsjektdeltagelser() != null && !a.getProsjektdeltagelser().isEmpty()) {
                     throw new Exception("Kan ikke slette en ansatt som har registrerte timer i prosjekter!");
                 }

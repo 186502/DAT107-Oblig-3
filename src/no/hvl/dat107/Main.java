@@ -46,7 +46,7 @@ public class Main {
                 case 13: visProsjektInfo(); break;
                 case 14: slettObjekt(); break;
                 case 0: fortsett = false; break;
-                default: System.out.println("Ugyldig valg. Prøv igjen.");
+                default: System.out.println("Ugyldig valg. Prøv igjen!");
             }
             
             System.out.println("\nTrykk ENTER for å fortsette...");
@@ -59,14 +59,14 @@ public class Main {
     
     private static void visHovedmeny() {
         System.out.println("\n--- FIRMAADMINISTRASJON ---");
-        System.out.println("1. Søk ansatt på ID");
-        System.out.println("2. Søk ansatt på brukernavn");
+        System.out.println("1. Finn ansatt på ID");
+        System.out.println("2. Finn ansatt på brukernavn");
         System.out.println("3. Vis alle ansatte");
         System.out.println("4. Oppdater stilling og/eller lønn");
         System.out.println("5. Legg til ny ansatt");
-        System.out.println("6. Søk avdeling på ID");
+        System.out.println("6. Finn avdeling på ID");
         System.out.println("7. Vis ansatte på avdeling");
-        System.out.println("8. Bytt avdeling for ansatt");
+        System.out.println("8. Bytt avdeling for en ansatt");
         System.out.println("9. Legg til ny avdeling");
         System.out.println("10. Legg til nytt prosjekt");
         System.out.println("11. Registrer prosjektdeltagelse");
@@ -166,7 +166,7 @@ public class Main {
             try {
                 ansettelsesdato = LocalDate.parse(datoInput, formatter);
             } catch (DateTimeParseException e) {
-                System.out.println("Ugyldig datoformat. Bruk dd.mm.yyyy");
+                System.out.println("Ugyldig datoformat. Vennligst bruk dd.mm.yyyy");
             }
         }
         
@@ -179,7 +179,7 @@ public class Main {
             try {
                 manedslonn = new BigDecimal(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.out.println("Ugyldig beløp. Prøv igjen.");
+                System.out.println("Ugyldig beløp. Prøv igjen!");
             }
         }
         
