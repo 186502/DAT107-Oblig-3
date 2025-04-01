@@ -67,7 +67,7 @@ public class AvdelingDAO {
         }
     }
     
-    public void slettAvdeling(int avdelingId) {
+    public void slettAvdeling(int avdelingId) throws Exception {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -89,6 +89,7 @@ public class AvdelingDAO {
             if (tx.isActive()) {
                 tx.rollback();
             }
+            throw e;
         } finally {
             em.close();
         }

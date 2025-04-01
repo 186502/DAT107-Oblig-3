@@ -116,7 +116,7 @@ public class ProsjektDAO {
         }
     }
     
-    public void slettProsjekt(int prosjektId) {
+    public void slettProsjekt(int prosjektId) throws Exception {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -138,6 +138,7 @@ public class ProsjektDAO {
             if (tx.isActive()) {
                 tx.rollback();
             }
+            throw e;
         } finally {
             em.close();
         }

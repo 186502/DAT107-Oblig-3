@@ -130,7 +130,7 @@ public class AnsattDAO {
         }
     }
     
-    public void slettAnsatt(int ansattId) {
+    public void slettAnsatt(int ansattId) throws Exception {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         try {
@@ -157,6 +157,7 @@ public class AnsattDAO {
             if (tx.isActive()) {
                 tx.rollback();
             }
+            throw e;
         } finally {
             em.close();
         }
