@@ -30,6 +30,9 @@ public class Main {
         boolean fortsett = true;
         
         while (fortsett) {
+        	
+        	System.out.println("Kobler til databasen...");
+        	
         	//Finner max nummeret til ansatt for å gjøre valg lettere i menyen
         	List<Ansatt> ansatte = ansattDAO.finnAlleAnsatte();
             for (Ansatt a : ansatte) {
@@ -47,6 +50,8 @@ public class Main {
             for (Prosjekt p : prosjekter) {
                 max_prosjekt_nr = p.getProsjektId();
             }
+            
+            System.out.println("Databasen er koblet til!");
             
             visHovedmeny();
             int valg = lesInn("Velg en handling", 0, 15);
@@ -66,7 +71,7 @@ public class Main {
                 case 12: registrerTimer(); break;
                 case 13: visProsjektInfo(); break;
                 case 14: slettObjekt(); break;
-                case 0: fortsett = false; break;
+                case 0: fortsett = false; System.out.println("Programmet vil avsluttes"); break;
                 default: System.out.println("Ugyldig valg. Prøv igjen!");
             }
             
@@ -74,7 +79,7 @@ public class Main {
             scanner.nextLine();
         }
         
-        System.out.println("Programmet avsluttes.");
+        System.out.println("Programmet er avsluttet.");
         scanner.close();
     }
     
